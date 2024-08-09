@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:imran_mohammed/card.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -121,7 +119,9 @@ class MyHomePage extends StatelessWidget {
                     height: 40,
                     child: IconButton(
                       padding: const EdgeInsets.all(0),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('search-item');
+                      },
                       color: const Color.fromRGBO(211, 211, 211, 1),
                       icon: const Icon(Icons.search_outlined,),
                       iconSize: 30,
@@ -141,7 +141,15 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('add-items');
+        },
+        backgroundColor: const Color.fromRGBO(63, 81, 243, 1),
+        foregroundColor: Colors.white,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add, size: 36,),
       ),
-    );
+    ));
   }
 }
