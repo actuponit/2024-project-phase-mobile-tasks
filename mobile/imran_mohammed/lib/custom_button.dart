@@ -4,7 +4,8 @@ class CustomButton extends StatelessWidget {
   final bool filled;
   final double width;
   final String text;
-  const CustomButton({super.key, this.filled=false, required this.text, required this.width});
+  final Function onPressed;
+  const CustomButton({super.key, this.filled=false, required this.text, required this.width, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ))
           ),
-          onPressed: (){}, 
+          onPressed: () {onPressed();}, 
           child: Text(text),
         ),
       );
@@ -37,7 +38,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ))
         ),
-        onPressed: (){}, 
+        onPressed: (){onPressed();}, 
         child: Text(text),
       ),
     );
