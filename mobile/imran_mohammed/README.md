@@ -4,7 +4,7 @@
 
 ## Overview
 
-This Flutter e-commerce project is a simple CRUD application designed to demonstrate the core functionalities of a shopping app without using global state management solutions. The app allows users to browse products, add them to the cart, view their cart, and complete the checkout process.
+This Flutter e-commerce project is a simple CRUD application designed to demonstrate the core functionalities of a shopping app without using global state management solutions. The app allows users to browse, add, delete, update products.
 
 ## Key Features
 
@@ -17,7 +17,7 @@ This Flutter e-commerce project is a simple CRUD application designed to demonst
 ## Screenshots
 
 ### Home Page
-![Home Page](https://raw.githubusercontent.com/actuponit/2024-project-phase-mobile-tasks/mobile/imran_mohammed/main/images/image.png)
+![Home Page](images/image.png)
 
 ### Product Listing
 ![Product Listing](https://example.com/product_listing.png)
