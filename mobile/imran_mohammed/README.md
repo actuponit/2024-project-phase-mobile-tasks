@@ -17,7 +17,7 @@ This Flutter e-commerce project is a simple CRUD application designed to demonst
 ## Screenshots
 
 ### Home Page
-![Home Page](https://example.com/home_page.png)
+![Home Page](https://raw.githubusercontent.com/actuponit/2024-project-phase-mobile-tasks/mobile/imran_mohammed/main/images/image.png)
 
 ### Product Listing
 ![Product Listing](https://example.com/product_listing.png)
