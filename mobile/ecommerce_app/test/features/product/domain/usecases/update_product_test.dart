@@ -27,7 +27,7 @@ void main() {
     when(mockProductRepository?.updateProduct(updatedProduct)).thenAnswer((_) async => const Right(updatedProduct));
 
     // act
-    final result = await updateProductUseCase?.execute(updatedProduct);
+    final result = await updateProductUseCase!(const UpdateProductParams(updatedProduct));
 
     // assert
     expect(result, const Right(updatedProduct));

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/usecases/usecase.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:ecommerce_app/features/product/domain/usecases/get_product.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,7 +37,7 @@ void main() {
     when(mockProductRepository?.getProducts()).thenAnswer((_) async => const Right(products));
 
     // act
-    final result = await getProductUseCase?.execute();
+    final result = await getProductUseCase!(NoParams());
 
     // assert
     expect(result, const Right(products));

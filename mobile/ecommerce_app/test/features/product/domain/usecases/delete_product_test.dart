@@ -29,7 +29,7 @@ void main() {
     when(mockProductRepository?.deleteProduct(productId)).thenAnswer((_) async => const Right(deletedProduct));
 
     // act
-    final result = await usecase?.execute(productId);
+    final result = await usecase!(const DeleteProducntParams(productId));
 
     // assert
     expect(result, const Right(deletedProduct));

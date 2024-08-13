@@ -26,7 +26,7 @@ void main() {
     when(mockProductRepository?.getSingleProduct('1')).thenAnswer((_) async => const Right(product));
 
     // act
-    final result = await getSingleProduct?.execute('1');
+    final result = await getSingleProduct!(const GetSingleProductParams('1'));
 
     // assert
     expect(result, const Right(product));
