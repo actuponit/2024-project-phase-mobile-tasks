@@ -1,0 +1,11 @@
+{
+    "statusCode": 200,
+    "message": "",
+    "data": {
+      "id": "6672940692adcb386d593686",
+      "name": "TV",
+      "description": "36' TV",
+      "price": 123.4,
+      "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718785031/images/zqfvuxrxhip7shikyyj4.png"
+    }
+}

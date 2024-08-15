@@ -148,6 +148,16 @@ void main() {
         expect(result, const Right(product as Product));
         verify(mockProductRemoteDatasource.getSingleProduct(id));
       });
+
+      test('should cache the data when the remote data call is successfull', () async {
+        // arrange
+        when(mockProductRemoteDatasource.getSingleProduct(id)).thenAnswer((_) async => product);
+        // act
+        await repository.getSingleProduct(id);
+        // assert
+        verify(mockProductRemoteDatasource.getSingleProduct(id));
+        verify(mockProductLocalDatasource.cacheSingleProduct(product));
+      });
       
       test('should throw exception when the remote data call is unsuccessfull', () async {
         // arrange
@@ -166,22 +176,22 @@ void main() {
 
       test('should get local data when the requested data is cached', () async {
         // arrange
-        when(mockProductLocalDatasource.getSingleProduct(id)).thenAnswer((_) async => product);
+        when(mockProductLocalDatasource.getSingleProduct()).thenAnswer((_) async => product);
         // act
         var result = await repository.getSingleProduct(id);
         // assert
-        verify(mockProductLocalDatasource.getSingleProduct(id));
+        verify(mockProductLocalDatasource.getSingleProduct());
         verifyZeroInteractions(mockProductRemoteDatasource);
         expect(result, const Right(product as Product));
       });
 
       test('should throw CacheFailure when there is no cached data', () async {
         // arrange
-        when(mockProductLocalDatasource.getSingleProduct(id)).thenThrow(CacheException());
+        when(mockProductLocalDatasource.getSingleProduct()).thenThrow(CacheException());
         // act
         var result = await repository.getSingleProduct(id);
         // assert
-        verify(mockProductLocalDatasource.getSingleProduct(id));
+        verify(mockProductLocalDatasource.getSingleProduct());
         verifyZeroInteractions(mockProductRemoteDatasource);
         expect(result, const Left(CacheFailure('Cache Failure')));
       });
@@ -227,7 +237,7 @@ void main() {
         // assert
         verify(mockNetworkInfo.isConnected);
         verifyZeroInteractions(mockProductRemoteDatasource);
-        expect(result, const Left(ServerFailure('Server Failure')));
+        expect(result, const Left(NoConnection('Can\'t connect to the server')));
       });
     });
   });
@@ -261,7 +271,7 @@ void main() {
         var result = await repository.deleteProduct(id);
         // assert
         verify(mockProductRemoteDatasource.deleteProduct(id));
-        expect(result, const Left(NoConnection('Server Failure')));
+        expect(result, const Left(ServerFailure('Server Failure')));
       });
     });
 
