@@ -20,3 +20,7 @@ class CacheFailure extends Failure {
 class NoConnection extends Failure {
   const NoConnection(super.message);
 }
+
+class InvalidInputFailure extends Failure {
+  const InvalidInputFailure(super.message);
+}

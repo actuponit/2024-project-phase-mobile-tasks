@@ -10,7 +10,7 @@ class Product extends Equatable {
   final String imageUrl;
 
   const Product({
-    required this.id,
+    this.id = '',
     required this.name,
     required this.description,
     required this.price,
