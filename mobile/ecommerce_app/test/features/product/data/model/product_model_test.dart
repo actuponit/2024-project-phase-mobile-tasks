@@ -32,13 +32,13 @@ void main() {
     expect(result, tProductModel);
   });
 
-  test('should convert product model object to a json', () {
+  test('should convert product model object to a json without the image field', () {
     // arrange
     final Map<String, dynamic> expectedMap = json.decode(fixtureReader('product.json'));
 
     // act
     final result = tProductModel.toJson();
-
+    expectedMap.remove('imageUrl');
     // assert
     expect(result, expectedMap);
   });

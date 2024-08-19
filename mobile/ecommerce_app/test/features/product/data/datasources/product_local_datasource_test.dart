@@ -24,6 +24,15 @@ void main() {
     price: 100,
     imageUrl: 'image1.jpg',
   );
+
+  const localProduct = ProductModel(
+    id: '1',
+    name: 'Product 1',
+    description: 'Description 1',
+    price: 100, 
+    imageUrl: '',
+  );
+
   const productList = [
     ProductModel(
       id: '1',
@@ -84,15 +93,16 @@ void main() {
       verify(sharedPreferencesMock.setStringList(ProductLocalDatasourceImpl.porductsKey, expectedJson));
     });
   });
+  
   group('getSingleProduct', (){
-    test('should return the last cached product', () async {
+    test('should return the last cached product and image is not cached', () async {
       // arrange
       when(sharedPreferencesMock.getString(ProductLocalDatasourceImpl.singleProductKey)).thenReturn(json.encode(product.toJson()));
       // act
       var result = await localDatasourceImpl.getSingleProduct();
       // assert
       verify(sharedPreferencesMock.getString(ProductLocalDatasourceImpl.singleProductKey));
-      expect(result, product);
+      expect(result, localProduct);
     });
     test('should thorw error if no product cached', () async {
       // arrange
