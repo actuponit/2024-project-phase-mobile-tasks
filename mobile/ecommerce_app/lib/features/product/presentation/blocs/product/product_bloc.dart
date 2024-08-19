@@ -60,8 +60,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<CreateProductEvent>((event, emit) async {
       final price = inputConverter.stringToUnsignedDouble(event.price);
-      price.fold(
-        (l) => emit(ErrorState(l.message)),
+      await price.fold(
+        (l) async => emit(ErrorState(l.message)),
         (price) async {
           emit(LoadingState());
           final newProduct = Product(name: event.name, price: price, description: event.description, imageUrl: event.imageUrl);
@@ -76,8 +76,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<UpdateProductEvent>((event, emit) async {
       final price = inputConverter.stringToUnsignedDouble(event.price);
-      price.fold(
-        (l) => emit(ErrorState(l.message)),
+      await price.fold(
+        (l) async => emit(ErrorState(l.message)),
         (price) async {
           emit(LoadingState());
           final newProduct = Product(id:event.id, name: event.name, price: price, description: event.description, imageUrl: event.imageUrl);

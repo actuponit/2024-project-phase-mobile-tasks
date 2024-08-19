@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+
 
 import '../../../../core/constants/constant.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -63,7 +65,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductModel> updateProduct(ProductModel product) async {
     var jsonResult = await client.put(Uri.parse('$baseUrl/${product.id}'), headers: {
       'Content-Type': 'application/json',
-    }, body: product.toJson());
+    }, body: jsonEncode(product.toJson()));
     if (jsonResult.statusCode == 200){
       var product = json.decode(jsonResult.body)['data'];
       return ProductModel.fromJson(product);
@@ -74,20 +76,24 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
-    var jsonResult = await client.post(Uri.parse(baseUrl), headers: {
-      'Content-Type': 'multipart/form-data',
-    }, body: {
-      'image': product.imageUrl,
-      'name': product.name,
-      'price': product.price.toString(),
-      'description': product.description,
-    });
+    var request = http.MultipartRequest('POST', Uri.parse(baseUrl));
 
-    if (jsonResult.statusCode == 200){
+    request.fields['name'] = product.name;
+    request.fields['price'] = product.price.toString();
+    request.fields['description'] = product.description;
+    
+    var pic = await http.MultipartFile.fromPath('image', product.imageUrl, contentType: MediaType('image', 'jpg'));
+    request.files.add(pic);
+
+    var response = await request.send();
+
+    if (response.statusCode == 201){
+      var jsonResult = await http.Response.fromStream(response);
       var product = json.decode(jsonResult.body)['data'];
       return ProductModel.fromJson(product);
     } else {
-      throw ServerException();
+      throw 
+      ServerException();
     }
   }
   }

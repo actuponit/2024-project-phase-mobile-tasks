@@ -26,12 +26,16 @@ class ProductRepositoryImpl implements ProductRepository {
         return Right(products);
       } on ServerException {
         return const Left(ServerFailure('Server Failure'));
+      } catch (e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     } else {
       try{
         return Right(await localDatasource.getProducts());
       } on CacheException {
         return const Left(CacheFailure('Cache Failure'));
+      }catch (e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     }
   }
@@ -45,12 +49,16 @@ class ProductRepositoryImpl implements ProductRepository {
         return Right(product);
       } on ServerException {
         return const Left(ServerFailure('Server Failure'));
+      } catch (e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     } else {
       try{
         return Right(await localDatasource.getSingleProduct());
       } on CacheException {
         return const Left(CacheFailure('Cache Failure'));
+      } catch (e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     }
   }
@@ -59,10 +67,12 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<Either<Failure, Product>> updateProduct(Product product) async {
     if (await networkInfo.isConnected) {
       try {
-        var updatedProduct = await remoteDatasource.updateProduct(product as ProductModel);
-        return Right(updatedProduct);
+        var updatedProduct = await remoteDatasource.updateProduct(ProductModel.fromEntity(product));
+        return Right(updatedProduct as Product);
       } on ServerException {
         return const Left(ServerFailure('Server Failure'));
+      } catch (e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     } else {
       return const Left(NoConnection('Can\'t connect to the server'));
@@ -87,10 +97,12 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<Either<Failure, Product>> addProduct(Product product) async {
     if (await networkInfo.isConnected) {
       try {
-        ProductModel newProduct = await remoteDatasource.addProduct(product as ProductModel);
+        ProductModel newProduct = await remoteDatasource.addProduct(ProductModel.fromEntity(product));
         return Right(newProduct);
       } on ServerException {
         return const Left(ServerFailure('Server Failure'));
+      } catch(e) {
+        return const Left(UnexpectedFailure('Unexpected Failure'));
       }
     } else {
       return const Left(NoConnection('Can\'t connect to the server'));
