@@ -5,7 +5,8 @@ class CustomButton extends StatelessWidget {
   final double width;
   final String text;
   final Function onPressed;
-  const CustomButton({super.key, this.filled=false, required this.text, required this.width, required this.onPressed});
+  final String buttonKey;
+  const CustomButton({super.key, this.buttonKey='buttonKey', this.filled=false, required this.text, required this.width, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class CustomButton extends StatelessWidget {
         height: 50,
         width: width,
         child: FilledButton(
+          key: Key(buttonKey),
           style: ButtonStyle(
             foregroundColor: const WidgetStatePropertyAll(Colors.white),
             backgroundColor: const WidgetStatePropertyAll(Color.fromRGBO(63, 81, 243, 1)),

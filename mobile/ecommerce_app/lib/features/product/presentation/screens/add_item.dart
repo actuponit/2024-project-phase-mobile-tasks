@@ -11,7 +11,8 @@ import '../widgets/snack_bar.dart';
 
 class AddItem extends StatefulWidget {
   final Product? product;
-  const AddItem({super.key, this.product});
+  final ImagePicker imagePicker;
+  const AddItem({super.key, this.product, required this.imagePicker});
 
   @override
   State<AddItem> createState() => _AddItemState();
@@ -20,9 +21,9 @@ class AddItem extends StatefulWidget {
 class _AddItemState extends State<AddItem> {
   File? _image;
 
-  Future getImage() async {
-    // ignore: deprecated_member_use
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future getImage(ImagePicker imagePicker) async {
+    
+    final image = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (image == null) {
       return;
@@ -51,9 +52,9 @@ class _AddItemState extends State<AddItem> {
       listener: (context, state) {
         if (state is LoadedSingleProductState) {
           if (widget.product == null) {
+            showSnackBar(context, Colors.green, 'Product added successfully');
             Navigator.of(context).popAndPushNamed('single_product',
                 arguments: state.product.id);
-            showSnackBar(context, Colors.green, 'Product added successfully');
           } else {
             Navigator.of(context).pop();
             showSnackBar(context, Colors.green, 'Product updated successfully');
@@ -110,7 +111,8 @@ class _AddItemState extends State<AddItem> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: getImage,
+                          key: const Key('image'),
+                          onPressed: () => getImage(widget.imagePicker),
                           icon: const Icon(
                             Icons.image_outlined,
                             size: 48,
@@ -153,6 +155,7 @@ class _AddItemState extends State<AddItem> {
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
+                      key: const Key('name'),
                       controller: _titleController,
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 6),
@@ -180,6 +183,7 @@ class _AddItemState extends State<AddItem> {
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
+                      key: const Key('price'),
                       keyboardType: TextInputType.number,
                       controller: _priceController,
                       decoration: const InputDecoration(
@@ -213,6 +217,7 @@ class _AddItemState extends State<AddItem> {
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
+                      key: const Key('category'),
                       controller: _categoryController,
                       decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 6),
@@ -238,6 +243,7 @@ class _AddItemState extends State<AddItem> {
                         color: const Color.fromRGBO(243, 243, 243, 1),
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
+                      key: const Key('description'),
                       maxLines: null,
                       controller: _descriptionController,
                       decoration: const InputDecoration(
@@ -249,10 +255,12 @@ class _AddItemState extends State<AddItem> {
                     height: 25,
                   ),
                   CustomButton(
+                    buttonKey: 'addButton',
                     filled: true,
                     text: widget.product == null ? 'ADD' : 'UPDATE',
                     width: double.infinity,
                     onPressed: () {
+                      debugPrint('fafdafadfadfafd');
                       final String title = _titleController.text;
                       final String category = _categoryController.text;
                       final String price = _priceController.text;
@@ -268,7 +276,7 @@ class _AddItemState extends State<AddItem> {
                         if (_image == null) {
                           showSnackBar(context, Colors.red, 'Please upload image');
                           return;
-                        } else {}
+                        }
                         BlocProvider.of<ProductBloc>(context).add(
                             CreateProductEvent(
                                 name: title,

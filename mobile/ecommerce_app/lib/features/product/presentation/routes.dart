@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../domain/entities/product.dart';
 import 'screens/add_item.dart';
@@ -10,7 +11,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case 'add-items':
       final Product? product = settings.arguments as Product?;
       return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => AddItem(product: product),
+        pageBuilder: (context, animation, secondaryAnimation) => AddItem(product: product, imagePicker: ImagePicker(),),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(0, 1.0);
           const end = Offset.zero;

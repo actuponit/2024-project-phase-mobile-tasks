@@ -90,8 +90,6 @@ class MyHomePageState extends State<MyHomePage> {
                       }
                       return CustomCard(
                         product: state.products[index - 1],
-                        deleteFunction: () {},
-                        updateFunction: () {},
                       );
                           }),
                       );

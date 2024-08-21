@@ -9,6 +9,7 @@ import 'package:ecommerce_app/features/product/domain/usecases/get_product.dart'
 import 'package:ecommerce_app/features/product/domain/usecases/get_single_product.dart';
 import 'package:ecommerce_app/features/product/domain/usecases/update_product.dart';
 import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mockito/annotations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +28,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     UpdateProductUsecase,
     DeleteProductUsecase,
     InputConverter,
+    ImagePicker,
   ],
   customMocks: [MockSpec<Client>(as: #MockClient)]
 )

@@ -6,9 +6,7 @@ import '../blocs/product/product_bloc.dart';
 
 class CustomCard extends StatelessWidget {
   final Product product;
-  final Function deleteFunction;
-  final Function() updateFunction;
-  const CustomCard({super.key, required this.product, required this.deleteFunction, required this.updateFunction});
+  const CustomCard({super.key, required this.product,});
 
   @override
   Widget build(BuildContext context) {
