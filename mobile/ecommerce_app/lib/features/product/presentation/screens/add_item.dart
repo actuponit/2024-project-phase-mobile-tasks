@@ -35,17 +35,17 @@ class _AddItemState extends State<AddItem> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _titleController = TextEditingController();
-    final TextEditingController _categoryController = TextEditingController();
-    final TextEditingController _priceController = TextEditingController();
-    final TextEditingController _descriptionController =
+    final TextEditingController titleController = TextEditingController();
+    final TextEditingController categoryController = TextEditingController();
+    final TextEditingController priceController = TextEditingController();
+    final TextEditingController descriptionController =
         TextEditingController();
 
     if (widget.product != null) {
-      _titleController.text = widget.product!.name;
-      _categoryController.text = widget.product!.name;
-      _priceController.text = '${widget.product!.price}';
-      _descriptionController.text = widget.product!.description;
+      titleController.text = widget.product!.name;
+      categoryController.text = widget.product!.name;
+      priceController.text = '${widget.product!.price}';
+      descriptionController.text = widget.product!.description;
     }
 
     return BlocListener<ProductBloc, ProductState>(
@@ -156,7 +156,7 @@ class _AddItemState extends State<AddItem> {
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
                       key: const Key('name'),
-                      controller: _titleController,
+                      controller: titleController,
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 6),
                         border: InputBorder.none,
@@ -185,7 +185,7 @@ class _AddItemState extends State<AddItem> {
                     child: TextField(
                       key: const Key('price'),
                       keyboardType: TextInputType.number,
-                      controller: _priceController,
+                      controller: priceController,
                       decoration: const InputDecoration(
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 6, vertical: 12),
@@ -218,7 +218,7 @@ class _AddItemState extends State<AddItem> {
                         borderRadius: BorderRadius.circular(6)),
                     child: TextField(
                       key: const Key('category'),
-                      controller: _categoryController,
+                      controller: categoryController,
                       decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 6),
                           border: InputBorder.none),
@@ -245,7 +245,7 @@ class _AddItemState extends State<AddItem> {
                     child: TextField(
                       key: const Key('description'),
                       maxLines: null,
-                      controller: _descriptionController,
+                      controller: descriptionController,
                       decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 6),
                           border: InputBorder.none),
@@ -261,10 +261,10 @@ class _AddItemState extends State<AddItem> {
                     width: double.infinity,
                     onPressed: () {
                       debugPrint('fafdafadfadfafd');
-                      final String title = _titleController.text;
-                      final String category = _categoryController.text;
-                      final String price = _priceController.text;
-                      final String description = _descriptionController.text;
+                      final String title = titleController.text;
+                      final String category = categoryController.text;
+                      final String price = priceController.text;
+                      final String description = descriptionController.text;
                       if (title.isEmpty ||
                           category.isEmpty ||
                           price.isEmpty ||

@@ -1,0 +1,10 @@
+{
+    "statusCode": 200,
+    "message": "",
+    "data": {
+      "_id": "1",
+      "name": "name",
+      "email": "im@gmail",
+      "__v": 0
+    }
+}

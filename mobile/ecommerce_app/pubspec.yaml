@@ -75,8 +75,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - images/background.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -103,6 +103,10 @@ flutter:
     - family: Sora
       fonts:
         - asset: fonts/Sora/Sora-VariableFont_wght.ttf
+    
+    - family: Caveat
+      fonts:
+        - asset: fonts/Caveat/CaveatBrush-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,5 +1,13 @@
+import 'package:ecommerce_app/core/http/custom_http.dart';
+import 'package:ecommerce_app/features/authentication/data/datasources/remote_datasource.dart';
+import 'package:ecommerce_app/features/authentication/data/datasources/token_handler.dart';
 import 'package:ecommerce_app/core/network/network_info.dart';
 import 'package:ecommerce_app/core/utils/input_converter.dart';
+import 'package:ecommerce_app/features/authentication/domain/repositories/repository.dart';
+import 'package:ecommerce_app/features/authentication/domain/usecases/get_user_usecase.dart';
+import 'package:ecommerce_app/features/authentication/domain/usecases/log_in_usecase.dart';
+import 'package:ecommerce_app/features/authentication/domain/usecases/log_out_usecase.dart';
+import 'package:ecommerce_app/features/authentication/domain/usecases/sign_up_usecase.dart';
 import 'package:ecommerce_app/features/product/data/datasources/product_local_datasource.dart';
 import 'package:ecommerce_app/features/product/data/datasources/product_remote_datasource.dart';
 import 'package:ecommerce_app/features/product/domain/repositories/product_repository.dart';
@@ -29,6 +37,14 @@ import 'package:shared_preferences/shared_preferences.dart';
     DeleteProductUsecase,
     InputConverter,
     ImagePicker,
+    AuthenticationRepository,
+    CustomHttp,
+    TokenHandler,
+    RemoteDataSource,
+    LogInUsecase,
+    LogOutUsecase,
+    SignUpUsecase,
+    GetUserUsecase
   ],
   customMocks: [MockSpec<Client>(as: #MockClient)]
 )
