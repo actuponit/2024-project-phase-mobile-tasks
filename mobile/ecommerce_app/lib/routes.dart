@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'features/authentication/presentation/screens/login.dart';
+import 'features/authentication/presentation/screens/signup.dart';
 import 'features/product/domain/entities/product.dart';
 import 'features/product/presentation/screens/add_item.dart';
 import 'features/product/presentation/screens/home.dart';
@@ -47,9 +48,27 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case 'login':
       return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const Login(),
+        pageBuilder: (context, animation, secondaryAnimation) => Login(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1, 0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 700),
+      );
+    case 'register':
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => Signup(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(-1, 0);
           const end = Offset.zero;
           const curve = Curves.ease;
 

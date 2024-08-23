@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/authentication/presentation/blocs/auth/auth_bloc.dart';
 import 'features/authentication/presentation/screens/splash_screen.dart';
 import 'features/product/presentation/blocs/product/product_bloc.dart';
 import 'injetion_container.dart';
@@ -11,8 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProductBloc>(
-      create: (_) => locator(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: locator(),
+        ),
+        BlocProvider<ProductBloc>(
+          create: locator(),
+        ),
+      ],
       child:  MaterialApp(
         title: 'Flutter interface',
         onGenerateRoute: generateRoute,

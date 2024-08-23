@@ -1,56 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../authentication/presentation/blocs/auth/auth_bloc.dart';
 import '../blocs/product/product_bloc.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
-  AppBar build(BuildContext context) {
-  return AppBar(
-    title: Row(
-    children: [
-    Container(
-    width: 50,
-    height: 50,
-    decoration: BoxDecoration(
-      color: const Color.fromRGBO(204, 204, 204, 1),
-      borderRadius: BorderRadius.circular(10),
-    ),
-    ),
-    const SizedBox(width: 8),
-    Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        'July 14, 2023',
-        style: TextStyle(
-          fontSize: 12,
-          color: Color.fromRGBO(170, 170, 170, 1),
-        ),
-      ),
-      RichText(
-        text: const TextSpan(
-          children: <TextSpan>[
-            TextSpan(
-              text: 'Hello,',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromRGBO(102, 102, 102, 1),
-              ),
+  PreferredSizeWidget build(BuildContext context) {
+    return AppBar(
+      title: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(204, 204, 204, 1),
+              borderRadius: BorderRadius.circular(10),
             ),
-            TextSpan(
-              text: ' John Doe',
-              style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+          ),
+          const SizedBox(width: 8),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'July 14, 2023',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color.fromRGBO(170, 170, 170, 1),
                 ),
+              ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is LoadedUserState) {
+                    return RichText(
+                      text: const TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Hello,',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(102, 102, 102, 1),
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' John Doe',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Expanded(
+                      child: Card(color: Color.fromRGBO(102, 102, 102, 1),),
+                    );
+                  }
+                },
               )
             ],
           ),
@@ -70,7 +81,8 @@ class HomeAppBar extends StatelessWidget {
               height: 40,
               child: IconButton(
                 onPressed: () {
-                  BlocProvider.of<ProductBloc>(context).add(LoadAllProductsEvent());
+                  BlocProvider.of<ProductBloc>(context)
+                      .add(LoadAllProductsEvent());
                 },
                 icon: const Icon(Icons.notifications_none_outlined),
               ),
@@ -91,6 +103,6 @@ class HomeAppBar extends StatelessWidget {
         ),
         const SizedBox(width: 20),
       ],
-  );
+    );
   }
 }
