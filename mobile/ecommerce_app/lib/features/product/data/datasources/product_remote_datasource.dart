@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 
 import '../../../../core/constants/constant.dart';
 import '../../../../core/errors/exceptions.dart';
+import '../../../../core/http/custom_http.dart';
 import '../models/product_model.dart';
 abstract class ProductRemoteDatasource {
 
@@ -17,7 +18,7 @@ abstract class ProductRemoteDatasource {
 }
 
 class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
-  final http.Client client;
+  final CustomHttp client;
 
   ProductRemoteDatasourceImpl(this.client);
   @override

@@ -25,7 +25,6 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProductBloc>(context).add(LoadAllProductsEvent());
     return SafeArea(
       child: Scaffold(
         appBar: !_searchMode

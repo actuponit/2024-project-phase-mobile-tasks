@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
-          create: locator(),
+          create: (_) => locator(),
         ),
         BlocProvider<ProductBloc>(
-          create: locator(),
+          create: (_) => locator(),
         ),
       ],
       child:  MaterialApp(

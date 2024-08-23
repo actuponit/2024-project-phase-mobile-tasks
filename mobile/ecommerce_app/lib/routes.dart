@@ -82,6 +82,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         },
         transitionDuration: const Duration(milliseconds: 700),
       );
+    case 'home':
+      return MaterialPageRoute(builder: (context) => const MyHomePage());
     default:
       return MaterialPageRoute(builder: (context) => const MyHomePage());
     }

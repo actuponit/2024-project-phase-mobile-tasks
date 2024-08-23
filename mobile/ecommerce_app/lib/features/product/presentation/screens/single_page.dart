@@ -75,12 +75,15 @@ class SinglePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        product.name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          height: 1.5,
-                          color: Color.fromRGBO(170, 170, 170, 1),
+                      Expanded(
+                        child: Text(
+                          product.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            height: 1.5,
+                            color: Color.fromRGBO(170, 170, 170, 1),
+                          ),
                         ),
                       ),
                       const Row(
@@ -106,13 +109,16 @@ class SinglePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        product.name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24,
-                            height: 1.5,
-                            color: Color.fromRGBO(62, 62, 62, 1)),
+                      Expanded(
+                        child: Text(
+                          product.name,
+                          overflow: TextOverflow.visible,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                              height: 1.5,
+                              color: Color.fromRGBO(62, 62, 62, 1)),
+                        ),
                       ),
                       Text(
                         '\$${product.price}',

@@ -12,11 +12,11 @@ import '../../../../fixtures/fixture_reader.dart';
 import '../../../../helpers/test_helpers.mocks.dart';
 
 void main() {
-  late MockClient client;
+  late MockCustomHttp client;
   late ProductRemoteDatasourceImpl remoteDatasourceImpl;
 
   setUp(() {
-    client = MockClient();
+    client = MockCustomHttp();
     remoteDatasourceImpl = ProductRemoteDatasourceImpl(client);
   });
 
