@@ -16,11 +16,24 @@ This Flutter e-commerce project is a simple CRUD application designed to demonst
 
 ## Screenshots
 
+### Splash
+![Splash screen](images/splash.jpg)
+
+### Login Page
+![Login](images/sign-up.jpg)
+
+### Sign Up Page
+![Sign up](images/login.jpg)
+
+### Log Out
+![Home Page](images/logout.jpg)
+
 ### Home Page
-![Home Page](images/home-page.jpg)
+![Home Page](images/shoe-list.jpg)
 
 ### Details page
 ![Details_Page](images/detail-2.jpg)
+![Details_Page](images/single-shoe-2.jpg)
 
 ### Add Product
 ![Add_Products](images/add-product-1.jpg)
@@ -33,6 +46,8 @@ This Flutter e-commerce project is a simple CRUD application designed to demonst
 ![Update_Page](images/update-1.jpg)
 ![Update_Page](images/update-2.jpg)
 
+### All chats page
+![Update_Page](images/chatpage.jpg)
 
 ## Figma Design
 
